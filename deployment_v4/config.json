@@ -1,0 +1,167 @@
+{
+  "version": "v4",
+  "architecture": "Stage A (milling, semua batch) + Stage B (upstream, mean-zero)",
+  "target_parameterization": {
+    "z_mid": "log(P50)",
+    "z_upper": "log(P90/P50)",
+    "z_lower": "log(P50/P10)",
+    "reconstruct": "P50=exp(z_mid); P90=P50*exp(z_upper); P10=P50/exp(z_lower)",
+    "note": "monotonisitas P10<P50<P90 dijamin secara aljabar"
+  },
+  "stage_a": {
+    "z_mid": {
+      "model_file": "stageA_z_mid.joblib",
+      "model_type": "trees_shallow",
+      "features": [
+        "Feed_Speed",
+        "Frequency",
+        "Screen_Size"
+      ],
+      "enabled": true
+    },
+    "z_upper": {
+      "model_file": "stageA_z_upper.joblib",
+      "model_type": "trees_shallow",
+      "features": [
+        "Feed_Speed",
+        "Frequency",
+        "Screen_Size"
+      ],
+      "enabled": true
+    },
+    "z_lower": {
+      "model_file": "stageA_z_lower.joblib",
+      "model_type": "gbm_shallow",
+      "features": [
+        "Feed_Speed",
+        "Frequency",
+        "Screen_Size"
+      ],
+      "enabled": true
+    }
+  },
+  "stage_b": {
+    "z_mid": {
+      "model_file": null,
+      "model_type": null,
+      "features": [
+        "ARE13333_T0",
+        "ARE1331_T0",
+        "TF_Time",
+        "C_Temp",
+        "C_pH",
+        "C_Time",
+        "C_T1"
+      ],
+      "enabled": false,
+      "mean_zero": true
+    },
+    "z_upper": {
+      "model_file": "stageB_z_upper.joblib",
+      "model_type": "trees_up",
+      "features": [
+        "ARE13333_T0",
+        "ARE1331_T0",
+        "TF_Time",
+        "C_Temp",
+        "C_pH",
+        "C_Time",
+        "C_T1"
+      ],
+      "enabled": true,
+      "mean_zero": true
+    },
+    "z_lower": {
+      "model_file": "stageB_z_lower.joblib",
+      "model_type": "ridge_up",
+      "features": [
+        "ARE13333_T0",
+        "ARE1331_T0",
+        "TF_Time",
+        "C_Temp",
+        "C_pH",
+        "C_Time",
+        "C_T1"
+      ],
+      "enabled": true,
+      "mean_zero": true
+    }
+  },
+  "conformal_quantiles_log": {
+    "z_mid": 0.32826636235809153,
+    "z_upper": 0.26243195775572126,
+    "z_lower": 0.3592993240378064
+  },
+  "coverage_target": 0.9,
+  "stage_b_offset": {
+    "z_upper": 0.01035112793662152,
+    "z_lower": -0.003991297003334826
+  },
+  "noise_floor": {
+    "P10": 0.8961455925668123,
+    "P50": 30.10845596969597,
+    "P90": 61.845582250925936,
+    "z_mid": 0.1781738955834101,
+    "z_upper": 0.15071149325771074,
+    "z_lower": 0.2184192602559329
+  },
+  "r2_ceiling": {
+    "P10": 0.16907589055240058,
+    "P50": 0.5828469524730355,
+    "P90": 0.35700433581734514,
+    "z_mid": 0.5952473511212286,
+    "z_upper": 0.5295141348921271,
+    "z_lower": 0.3578192310222612
+  },
+  "upstream_median": {
+    "ARE13333_T0": 71.2,
+    "ARE1331_T0": 72.4,
+    "TF_Time": 14.0,
+    "C_Temp": 70.5,
+    "C_pH": 6.38,
+    "C_Time": 11.0,
+    "C_T1": 73.1
+  },
+  "setpoints": [
+    "ARE13333_T0",
+    "ARE1331_T0",
+    "C_T1",
+    "Feed_Speed",
+    "Frequency",
+    "Screen_Size"
+  ],
+  "outcomes": [
+    "TF_Time",
+    "C_Temp",
+    "C_pH",
+    "C_Time"
+  ],
+  "spec": {
+    "P50": [
+      100.0,
+      200.0
+    ],
+    "P90": [
+      400.0,
+      600.0
+    ]
+  },
+  "need_centering": false,
+  "feed_speed_unit": "RPM",
+  "feed_speed_observed": [
+    1200.0,
+    1600.0
+  ],
+  "frequency_observed": [
+    20.0,
+    25.0,
+    30.0
+  ],
+  "screen_size_observed": [
+    1.0,
+    1.5,
+    2.0
+  ],
+  "n_batches_total": 75,
+  "n_batches_with_upstream": 44
+}

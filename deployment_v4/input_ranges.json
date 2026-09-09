@@ -1,0 +1,72 @@
+{
+  "Feed_Speed": {
+    "min": 1200.0,
+    "max": 1600.0,
+    "median": 1600.0,
+    "code": "X8",
+    "role": "setpoint"
+  },
+  "Frequency": {
+    "min": 20.0,
+    "max": 30.0,
+    "median": 30.0,
+    "code": "X9",
+    "role": "setpoint"
+  },
+  "Screen_Size": {
+    "min": 1.0,
+    "max": 2.0,
+    "median": 1.5,
+    "code": "X10",
+    "role": "setpoint"
+  },
+  "ARE13333_T0": {
+    "min": 70.0,
+    "max": 72.9,
+    "median": 71.2,
+    "code": "X1",
+    "role": "setpoint"
+  },
+  "ARE1331_T0": {
+    "min": 70.1,
+    "max": 75.3,
+    "median": 72.4,
+    "code": "X2",
+    "role": "setpoint"
+  },
+  "TF_Time": {
+    "min": 8.0,
+    "max": 19.0,
+    "median": 14.0,
+    "code": "X3",
+    "role": "outcome"
+  },
+  "C_Temp": {
+    "min": 70.1,
+    "max": 72.5,
+    "median": 70.5,
+    "code": "X4",
+    "role": "outcome"
+  },
+  "C_pH": {
+    "min": 6.13,
+    "max": 6.59,
+    "median": 6.38,
+    "code": "X5",
+    "role": "outcome"
+  },
+  "C_Time": {
+    "min": 10.0,
+    "max": 14.0,
+    "median": 11.0,
+    "code": "X6",
+    "role": "outcome"
+  },
+  "C_T1": {
+    "min": 70.9,
+    "max": 74.6,
+    "median": 73.1,
+    "code": "X7",
+    "role": "setpoint"
+  }
+}
